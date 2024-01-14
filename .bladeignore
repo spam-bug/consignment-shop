@@ -1,0 +1,3 @@
+resources/views/email/**
+resources/views/vendor/notifications/**
+resources/views/vendor/mail/**
