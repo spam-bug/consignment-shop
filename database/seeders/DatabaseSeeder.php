@@ -24,16 +24,6 @@ class DatabaseSeeder extends Seeder
             'status' => UserStatus::Active
         ]);
 
-        $consignorUser = \App\Models\User::create([
-            'type' => UserType::Consignor,
-            'name' => 'Consignor Demo',
-            'email' => 'consignor@example.com',
-            'password' => Hash::make('qweqweqwe'),
-            'status' => UserStatus::Active
-        ]);
-
-        $consignorUser->consignor()->create([]);
-
         $this->call([
             CategorySeeder::class,
             ProductSeeder::class,
