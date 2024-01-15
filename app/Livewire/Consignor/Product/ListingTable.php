@@ -5,6 +5,7 @@ namespace App\Livewire\Consignor\Product;
 use App\Enums\AlertType;
 use App\Enums\ProductStatus;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -45,7 +46,7 @@ class ListingTable extends Component
     public function render()
     {
         return view('livewire.consignor.product.listing-table', [
-            'products' => Product::paginate('10')
+            'products' => Auth::user()->consignor->products->paginate(10)
         ]);
     }
 }
