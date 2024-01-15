@@ -46,7 +46,7 @@ class ListingTable extends Component
     public function render()
     {
         return view('livewire.consignor.product.listing-table', [
-            'products' => Auth::user()->consignor->products->paginate(10)
+            'products' => Auth::user()->consignor->products()->paginate(10)
         ]);
     }
 }
