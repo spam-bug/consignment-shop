@@ -30,9 +30,19 @@
 
     <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-6 lg:gap-8">
         @forelse ($products as $product)
-            <a class="inline-block overflow-hidden rounded border border-gray-200 p-4 hover:shadow">
+            <a
+                href="{{ route('consignee.products.look.preview', $product) }}"
+                wire:navigate
+                class="inline-block overflow-hidden rounded border border-gray-200 p-4 hover:shadow"
+            >
                 <div class="aspect-square">
-                    <img src="{{ asset($product->photos[0]) }}" alt="">
+                    @if (file_exists(asset($product->photos[0])))
+                        <img src="{{ asset($product->photos[0]) }}" alt="">
+                    @else
+                        <div class="flex h-full w-full items-center justify-center bg-gray-100">
+                            <i class="fa-regular fa-image text-4xl text-gray-300"></i>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="mt-4 grid h-[96px] grid-rows-2">

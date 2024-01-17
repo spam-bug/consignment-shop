@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Product extends Model
 {
@@ -54,6 +55,11 @@ class Product extends Model
     public function damageRecords(): HasMany
     {
         return $this->hasMany(ProductDamageRecord::class);
+    }
+
+    public function shortlists(): HasMany
+    {
+        return $this->hasMany(Shortlist::class);
     }
 
     protected function price(): Attribute
@@ -101,5 +107,10 @@ class Product extends Model
     public function isLowOnStock(): bool
     {
         return $this->stock_threshold > $this->stock;
+    }
+
+    public function isShortListed(): bool
+    {
+        return $this->shortlists()->where('consignee_id', Auth::user()->consignee->id)->exists();
     }
 }

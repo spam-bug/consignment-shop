@@ -69,11 +69,11 @@
                             >
                                 <li>
                                     <a
-                                        href="{{ route('consignee.products.search') }}"
+                                        href="{{ route('consignee.products.look') }}"
                                         wire:navigate
                                         class="flex w-full items-center gap-2 rounded px-4 py-2 hover:bg-gray-100"
                                     >
-                                        Search
+                                        Look Up
                                     </a>
                                 </li>
 

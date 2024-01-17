@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Consignee extends Model
@@ -23,5 +24,10 @@ class Consignee extends Model
     public function business(): MorphOne
     {
         return $this->morphOne(Business::class, 'modelable');
+    }
+
+    public function shortlists(): HasMany
+    {
+        return $this->hasMany(Shortlist::class);
     }
 }
