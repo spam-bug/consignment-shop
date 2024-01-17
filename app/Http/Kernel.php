@@ -9,6 +9,7 @@ use App\Http\Middleware\RedirectIfAccountIsActive;
 use App\Http\Middleware\RedirectIfAccountIsInactive;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\RedirectIfNotAdmin;
+use App\Http\Middleware\RedirectIfNotConsignee;
 use App\Http\Middleware\RedirectIfNotConsignor;
 use App\Http\Middleware\RedirectIfTwoFactorIsVerified;
 use App\Http\Middleware\TrimStrings;
@@ -16,7 +17,6 @@ use App\Http\Middleware\TrustProxies;
 use App\Http\Middleware\TwoFactorAuthentication;
 use App\Http\Middleware\ValidateSignature;
 use App\Http\Middleware\VerifyCsrfToken;
-use App\Http\Middleware\VerifyNewDevice;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
@@ -96,6 +96,7 @@ class Kernel extends HttpKernel
         'verified' => EnsureEmailIsVerified::class,
         'admin' => RedirectIfNotAdmin::class,
         'consignor' => RedirectIfNotConsignor::class,
+        'consignee' => RedirectIfNotConsignee::class,
         'account.active' => RedirectIfAccountIsInactive::class,
         'account.inactive' => RedirectIfAccountIsActive::class,
         'two-factor' => TwoFactorAuthentication::class,

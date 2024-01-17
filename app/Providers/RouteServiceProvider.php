@@ -40,6 +40,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('consignor')
                 ->group(base_path('routes/consignor.php'));
 
+            Route::middleware(['web', 'auth', 'account.active', 'two-factor', 'consignee'])
+                ->prefix('consignee')
+                ->as('consignee.')
+                ->group(base_path('routes/consignee.php'));
+
             Route::middleware(['web', 'auth', 'admin'])
                 ->prefix('admin')
                 ->group(base_path('routes/admin.php'));

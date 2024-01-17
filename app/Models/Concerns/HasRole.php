@@ -51,6 +51,11 @@ trait HasRole
         return $this->type === UserType::Consignee;
     }
 
+    public function isNotConsignee(): bool
+    {
+        return ! $this->isConsignee();
+    }
+
     public function redirectHome(): RedirectResponse
     {
         return redirect()->route($this->homeRoute());
@@ -77,6 +82,6 @@ trait HasRole
 
     public function consigneeHomeRoute(): string
     {
-        return '';
+        return 'consignee.dashboard';
     }
 }
