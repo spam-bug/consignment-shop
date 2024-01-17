@@ -78,8 +78,12 @@
                                 </li>
 
                                 <li>
-                                    <a href="#" class="flex w-full items-center gap-2 rounded px-4 py-2 hover:bg-gray-100">
-                                        Shortlist
+                                    <a
+                                        href="{{ route('consignee.products.shortlists') }}"
+                                        wire:navigate
+                                        class="flex w-full items-center gap-2 rounded px-4 py-2 hover:bg-gray-100"
+                                    >
+                                        Shortlists
                                     </a>
                                 </li>
 

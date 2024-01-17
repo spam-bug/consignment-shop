@@ -22,9 +22,10 @@ class RegistrationRequest extends FormRequest
         return [
             'type' => ['required'],
             'name' => ['required', 'alpha_spaces'],
+            'username' => ['required', 'alpha_num', 'min:3', 'unique:users,username'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:8'],
-            'business_name' => ['required', 'alpha_spaces'],
+            'business_name' => ['required', 'alpha_spaces', 'unique:businesses,name'],
             'business_permit' => ['required', 'mimes:jpg,png'],
         ];
     }
@@ -34,6 +35,7 @@ class RegistrationRequest extends FormRequest
         $user = User::create([
             'type' => $this->type,
             'name' => $this->name,
+            'username' => $this->username,
             'email' => $this->email,
             'password' => Hash::make($this->password),
             'status' => UserStatus::Inactive,

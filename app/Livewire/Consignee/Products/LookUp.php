@@ -5,6 +5,7 @@ namespace App\Livewire\Consignee\Products;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -33,7 +34,11 @@ class LookUp extends Component
                     $query->whereHas('category', function ($query) use ($category) {
                         $query->where('slug', $category);
                     });
-                })->paginate(10)
+                })
+                ->whereDoesntHave('shortlists', function ($query) {
+                    $query->where('consignee_id', Auth::user()->consignee->id);
+                })
+                ->paginate(10)
         ]);
     }
 }

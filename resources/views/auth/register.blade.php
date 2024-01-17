@@ -67,6 +67,16 @@
             </div>
 
             <div class="mt-4">
+                <x-form.label for="username">Username</x-form.label>
+                <x-form.input
+                    id="username"
+                    type="text"
+                    name="username"
+                />
+                <x-form.error for="username" />
+            </div>
+
+            <div class="mt-4">
                 <x-form.label for="email">Email</x-form.label>
                 <x-form.input
                     id="email"

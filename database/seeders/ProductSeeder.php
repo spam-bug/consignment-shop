@@ -59,7 +59,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 [
-                    'consignor_id' => 2,
+                    'consignor_id' => 1,
                     'category_id' => rand(1, 5),
                     'sku' => 'RBX500',
                     'name' => 'Rockbeast 500 Bass Guitar',

@@ -50,7 +50,7 @@
     <div class="p-4 sm:p-6 lg:p-8">
         <div class="flex gap-2">
             <x-avatar src="{{ $product->consignor->user->photo() }}" />
-            <p class="font-medium">{{ $product->consignor->user->name }}</p>
+            <p class="font-medium">{{ $product->consignor->user->username }}</p>
         </div>
     </div>
 </div>

@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             $consignorUser = User::create([
                 'type' => UserType::Consignor,
                 'name' => 'consignor',
+                'username' => 'consignor',
                 'email' => 'consignor@example.com',
                 'password' => Hash::make('qweqweqwe'),
                 'status' => UserStatus::Active
@@ -47,6 +48,7 @@ class DatabaseSeeder extends Seeder
             $consigneeUser = User::create([
                 'type' => UserType::Consignee,
                 'name' => 'consignee',
+                'username' => 'consignee',
                 'email' => 'consignee@example.com',
                 'password' => Hash::make('qweqweqwe'),
                 'status' => UserStatus::Active
