@@ -17,17 +17,11 @@ class Shortlists extends Component
 {
     public function processContract(string $consignorUsername)
     {
-        $consignee = Auth::user()->consignee;
+        $this->redirect(route('consignee.contract', ['username' => $consignorUsername]), true);
 
-        $shortlists = $consignee->shortlists()->with('product.consignor')->get();
+        
 
-        $groupedShortlists = $shortlists->groupBy(function ($item) {
-            return optional($item->product->consignor->user)->username;
-        });
-
-        $shortlists = $groupedShortlists[$consignorUsername];
-
-        $products = [];
+        // $products = [];
 
         // foreach ($shortlists as $shortlist) {
         //     $products[] = $shortlist->product_id;
