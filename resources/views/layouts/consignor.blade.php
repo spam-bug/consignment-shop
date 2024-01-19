@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $title() }} | {{ config('app.name') }}</title>
+    <title>{{ is_callable($title) ? $title() : $title }} | {{ config('app.name') }}</title>
 
     <link
         rel="stylesheet"
@@ -62,7 +62,11 @@
                 </li>
 
                 <li>
-                    <a href="" class="flex items-center gap-2 rounded px-4 py-2 hover:bg-gray-100">
+                    <a
+                        href="{{ route('consignor.contracts') }}"
+                        wire:navigate
+                        class="flex items-center gap-2 rounded px-4 py-2 hover:bg-gray-100"
+                    >
                         <i class="fa-regular fa-file"></i>
                         <p>Contracts</p>
                     </a>
@@ -73,7 +77,7 @@
 
     <div class="lg:ml-64">
         <header class="sticky inset-0 z-40 flex h-[65px] items-center justify-between border-b border-gray-200 bg-white p-4">
-            <h1 class="text-2xl font-medium">{{ $title() }}</h1>
+            <h1 class="text-2xl font-medium">{{ is_callable($title) ? $title() : $title }}</h1>
 
             <x-button
                 variety="secondary"

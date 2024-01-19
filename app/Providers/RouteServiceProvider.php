@@ -38,6 +38,7 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware(['web', 'auth', 'account.active', 'two-factor', 'consignor'])
                 ->prefix('consignor')
+                ->as('consignor.')
                 ->group(base_path('routes/consignor.php'));
 
             Route::middleware(['web', 'auth', 'account.active', 'two-factor', 'consignee'])
