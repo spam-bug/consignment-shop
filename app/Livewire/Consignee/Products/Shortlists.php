@@ -6,6 +6,7 @@ use App\Enums\ContractStatus;
 use App\Models\Contract;
 use App\Models\Shortlist;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
@@ -17,23 +18,30 @@ class Shortlists extends Component
 {
     public function processContract(string $consignorUsername)
     {
-        $this->redirect(route('consignee.contract', ['username' => $consignorUsername]), true);
+        $consignee = Auth::user()->consignee;
+        $consignor = User::where('username', $consignorUsername)->first()->consignor;
 
-        
+        $groupedShortlists = $this->getGroupedShorlists();
+        $shortlists = $groupedShortlists[$consignorUsername];
 
-        // $products = [];
+        $filename = now()->timestamp . "-{$consignee->user->name}-{$consignor->user->name}.pdf";
+        $path = "{$consignee->user->username}/$filename";
 
-        // foreach ($shortlists as $shortlist) {
-        //     $products[] = $shortlist->product_id;
+        $pdf = Pdf::loadView('pdf.contract', [
+            'shortlists' => $shortlists,
+            'consignor' => $consignor,
+        ])->setPaper('legal');
 
-        //     $this->delete($shortlist);
-        // }
+        $pdf->output();
 
-        // $contract = Contract::create([
-        //     'consignor_id' => User::where('username', $consignorUsername)->first()->id,
-        //     'generated_contract' => '',
-        //     'status' => ContractStatus::Pending,
-        // ]);
+        $this->addWatermark($pdf);
+
+        $pdf->save($path, "contracts");
+
+        $contract = $this->createContract($consignee, $consignor, $path);
+        $this->attachProducts($contract, $shortlists);
+
+        $this->deleteShortlists($shortlists);
     }
 
     public function delete(Shortlist $shortlist): void
@@ -43,20 +51,65 @@ class Shortlists extends Component
 
     public function render()
     {
-        $consignee = Auth::user()->consignee;
-
-        if ($consignee->shortlists()->count()) {
-            $shortlists = $consignee->shortlists()->with('product.consignor')->get();
-
-            $groupedShortlists = $shortlists->groupBy(function ($item) {
-                return optional($item->product->consignor->user)->username;
-            });
-        } else {
-            $groupedShortlists = new Collection();
-        }
-
         return view('livewire.consignee.products.shortlists', [
-            'groupedShortlists' => $groupedShortlists,
+            'groupedShortlists' => $this->getGroupedShorlists(),
         ]);
     }
+
+    private function getGroupedShorlists(): Collection
+    {
+        $consignee = Auth::user()->consignee;
+
+        if (!$consignee->shortlists()->count()) {
+            return new Collection();
+        }
+
+        $shorlists = $consignee->shortlists()->with('product.consignor')->get();
+
+        return $shorlists->groupBy(function ($item) {
+            return optional($item->product->consignor->user)->username;
+        });
+    }
+
+    private function addWatermark($pdf): void
+    {
+        $canvas = $pdf->getDomPDF()->getCanvas();
+
+        $canvas->page_text(
+            x: $canvas->get_width() / 5,
+            y: $canvas->get_height() / 1.4,
+            text: 'Consignment shop',
+            font: 'sans-serif',
+            size: 96,
+            color: [0, 0, 0, "alpha" => 0.1],
+            word_space: 0.0,
+            char_space: 0.0,
+            angle: -65,
+        );
+    }
+
+    private function createContract($consignee, $consignor, $path)
+    {
+        return $consignee->contracts()->create([
+            'consignor_id' => $consignor->id,
+            'generated_contract' => "contracts/{$path}",
+            'status' => ContractStatus::Pending,
+            'expired_at' => now()->addYear(),
+        ]);
+    }
+
+    private function attachProducts($contract, $shortlists)
+    {
+        $productIds = $shortlists->pluck('product.id')->toArray();
+
+        $contract->products()->attach($productIds);
+    }
+
+    private function deleteShortlists($shortlists)
+    {
+        $shortlists->each(function ($shortlist) {
+            $shortlist->delete();
+        });
+    }
+
 }

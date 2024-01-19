@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignIdFor(Consignee::class);
             $table->foreignIdFor(Consignor::class);
             $table->string('generated_contract');
+            $table->string('uploaded_consignee_contract')->nullable();
+            $table->string('uploaded_consignor_contract')->nullable();
             $table->string('signed_contract')->nullable();
             $table->string('status');
             $table->timestamp('expired_at')->nullable();

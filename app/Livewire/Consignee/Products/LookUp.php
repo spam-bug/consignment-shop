@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Consignee\Products;
 
+use App\Enums\ContractStatus;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
@@ -33,6 +34,12 @@ class LookUp extends Component
                 ->when($this->category, function ($query, $category) {
                     $query->whereHas('category', function ($query) use ($category) {
                         $query->where('slug', $category);
+                    });
+                })
+                ->whereDoesntHave('contracts', function ($query) {
+                    $query->where(function ($query) {
+                        $query->where('consignee_id', Auth::user()->consignee->id)
+                            ->whereNotIn('status', [ContractStatus::Rejected, ContractStatus::Expired]);
                     });
                 })
                 ->whereDoesntHave('shortlists', function ($query) {

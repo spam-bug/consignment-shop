@@ -104,7 +104,11 @@
                 </li>
 
                 <li>
-                    <a href="" class="flex items-center gap-2 rounded px-4 py-2 hover:bg-gray-100">
+                    <a
+                        href="{{ route('consignee.contracts') }}"
+                        wire:navigate
+                        class="flex items-center gap-2 rounded px-4 py-2 hover:bg-gray-100"
+                    >
                         <i class="fa-regular fa-file"></i>
                         <p>Contracts</p>
                     </a>

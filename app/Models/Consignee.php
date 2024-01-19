@@ -30,4 +30,9 @@ class Consignee extends Model
     {
         return $this->hasMany(Shortlist::class);
     }
+
+    public function contracts(): HasMany
+    {
+        return $this->hasMany(Contract::class);
+    }
 }
