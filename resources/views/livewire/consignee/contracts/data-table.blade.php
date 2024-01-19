@@ -7,6 +7,7 @@
             <x-table.heading class="hidden lg:table-cell">Signed by consignor</x-table.heading>
             <x-table.heading>Status</x-table.heading>
             <x-table.heading class="hidden lg:table-cell">Created On</x-table.heading>
+            <x-table.heading class="hidden lg:table-cell">Expired On</x-table.heading>
             <x-table.heading></x-table.heading>
         </x-slot:header>
 
@@ -48,24 +49,26 @@
                     </x-table.column>
 
                     <x-table.column class="hidden lg:table-cell">{{ $contract->created_at }}</x-table.column>
+                    <x-table.column class="hidden lg:table-cell">{{ $contract->expired_at }}</x-table.column>
 
                     <x-table.column>
-                        <x-dropdown>
-                            <x-slot:trigger>
-                                <i class="fa-solid fa-ellipsis"></i>
-                            </x-slot:trigger>
+                        @if ($contract->status !== \App\Enums\ContractStatus::Approve)
+                            <x-dropdown>
+                                <x-slot:trigger>
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </x-slot:trigger>
 
-                            <x-slot:menu>
-                                @if ($contract->status === \App\Enums\ContractStatus::Pending)
-                                    <x-dropdown.button
-                                        x-on:click="$dispatch('open-modal', { identifier: 'contract-uploader', 'contract': {{ $contract }} })"
-                                    >
-                                        Upload
-                                    </x-dropdown.button>
-                                @endif
-                                <x-dropdown.link>Cancel</x-dropdown.link>
-                            </x-slot:menu>
-                        </x-dropdown>
+                                <x-slot:menu>
+                                    @if ($contract->status === \App\Enums\ContractStatus::Pending)
+                                        <x-dropdown.button
+                                            x-on:click="$dispatch('open-modal', { identifier: 'contract-uploader', 'contract': {{ $contract }} })"
+                                        >
+                                            Upload
+                                        </x-dropdown.button>
+                                    @endif
+                                </x-slot:menu>
+                            </x-dropdown>
+                        @endif
                     </x-table.column>
                 </x-table.row>
             @empty
