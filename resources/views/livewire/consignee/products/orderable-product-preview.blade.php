@@ -35,7 +35,7 @@
                 </div>
                 <div class="mt-8 flex gap-2">
                     <x-button.link
-                        href="{{ route('consignee.products.look') }}"
+                        href="{{ route('consignee.products.orderable') }}"
                         wire:navigate
                         variety="secondary"
                         outline

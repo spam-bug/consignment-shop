@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\TwoFactorAuthenticationController;
 use App\Http\Controllers\Consignor\DashboardController as ConsignorDashboardController;
 use App\Http\Controllers\Consignor\ProductController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,5 +49,13 @@ Route::middleware('auth')->group(function () {
     Route::prefix('email')->group(function () {
         Route::get('/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->middleware('signed')->name('verification.verify');
         Route::post('verification-notification', [EmailVerificationController::class, 'resend'])->name('verification.send');
+    });
+});
+
+
+Route::prefix('dev')->group(function () {
+    Route::get('/reset-database', function () {
+        Artisan::call('migrate:fresh --seed');
+        return redirect()->route('home');
     });
 });

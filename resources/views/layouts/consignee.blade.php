@@ -54,7 +54,7 @@
                     <div x-data="{ expanded: false }">
                         <button class="flex w-full items-center justify-between rounded px-4 py-2 hover:bg-gray-100" @click="expanded = ! expanded">
                             <div class="flex items-center gap-2">
-                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
                                 <p>Products</p>
                             </div>
                             <i class="fa-solid fa-chevron-down transition-transform duration-300" x-bind:class="{ 'rotate-180': expanded }"></i>
@@ -96,15 +96,20 @@
                                         Orderable
                                     </a>
                                 </li>
-
-                                <li>
-                                    <a href="#" class="flex w-full items-center gap-2 rounded px-4 py-2 hover:bg-gray-100">
-                                        Cart
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                     </div>
+                </li>
+
+                <li>
+                    <a
+                        href="{{ route('consignee.cart') }}"
+                        wire:navigate
+                        class="flex items-center gap-2 rounded px-4 py-2 hover:bg-gray-100"
+                    >
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <p>Cart</p>
+                    </a>
                 </li>
 
                 <li>
@@ -113,7 +118,7 @@
                         wire:navigate
                         class="flex items-center gap-2 rounded px-4 py-2 hover:bg-gray-100"
                     >
-                        <i class="fa-regular fa-file"></i>
+                        <i class="fa-solid fa-file"></i>
                         <p>Contracts</p>
                     </a>
                 </li>

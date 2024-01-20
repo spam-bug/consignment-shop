@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\Consignee\ContractController;
 use App\Http\Controllers\Consignee\DashboardController;
+use App\Livewire\Consignee\Checkout;
 use App\Livewire\Consignee\Products\LookUp;
 use App\Livewire\Consignee\Products\LookUpPreview;
 use App\Livewire\Consignee\Products\OrderableProductPreview;
 use App\Livewire\Consignee\Products\OrderableProducts;
 use App\Livewire\Consignee\Products\Shortlists;
+use App\Livewire\Consignee\ShoppingCart;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,6 +27,9 @@ Route::prefix('products')->group(function () {
         Route::get('/{product:slug}', OrderableProductPreview::class)->name('products.orderable.preview');
     });
 });
+
+Route::get('/cart', ShoppingCart::class)->name('cart');
+Route::get('/checkout', Checkout::class)->name('checkout');
 
 Route::prefix('contracts')->group(function () {
     Route::get('/', [ContractController::class, 'index'])->name('contracts');
