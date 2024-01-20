@@ -114,6 +114,17 @@
 
                 <li>
                     <a
+                        href="{{ route('consignee.orders') }}"
+                        wire:navigate
+                        class="flex items-center gap-2 rounded px-4 py-2 hover:bg-gray-100"
+                    >
+                        <i class="fa-solid fa-clipboard"></i>
+                        <p>Orders</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a
                         href="{{ route('consignee.contracts') }}"
                         wire:navigate
                         class="flex items-center gap-2 rounded px-4 py-2 hover:bg-gray-100"

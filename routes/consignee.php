@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Consignee\ContractController;
 use App\Http\Controllers\Consignee\DashboardController;
+use App\Http\Controllers\Consignee\OrderController;
 use App\Livewire\Consignee\Checkout;
 use App\Livewire\Consignee\Products\LookUp;
 use App\Livewire\Consignee\Products\LookUpPreview;
@@ -26,6 +27,10 @@ Route::prefix('products')->group(function () {
         Route::get('/', OrderableProducts::class)->name('products.orderable');
         Route::get('/{product:slug}', OrderableProductPreview::class)->name('products.orderable.preview');
     });
+});
+
+Route::prefix('orders')->group(function () {
+    Route::get('/', [OrderController::class, 'index'])->name('orders');
 });
 
 Route::get('/cart', ShoppingCart::class)->name('cart');

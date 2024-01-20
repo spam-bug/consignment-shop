@@ -31,6 +31,11 @@ class Consignor extends Model
         return $this->hasMany(Contract::class);
     }
 
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function business(): MorphOne
     {
         return $this->morphOne(Business::class, 'modelable');

@@ -56,8 +56,19 @@
                         wire:navigate
                         class="flex items-center gap-2 rounded px-4 py-2 hover:bg-gray-100"
                     >
-                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
                         <p>Products</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="{{ route('consignor.orders') }}"
+                        wire:navigate
+                        class="flex items-center gap-2 rounded px-4 py-2 hover:bg-gray-100"
+                    >
+                        <i class="fa-solid fa-clipboard"></i>
+                        <p>Orders</p>
                     </a>
                 </li>
 
@@ -67,7 +78,7 @@
                         wire:navigate
                         class="flex items-center gap-2 rounded px-4 py-2 hover:bg-gray-100"
                     >
-                        <i class="fa-regular fa-file"></i>
+                        <i class="fa-solid fa-file"></i>
                         <p>Contracts</p>
                     </a>
                 </li>
