@@ -14,7 +14,7 @@
                 <x-table.row>
                     <x-table.column class="font-medium">{{ strtoupper($order->reference_number) }}</x-table.column>
 
-                    <x-table.column class="hidden lg:table-cell">{{ $order->items()->count() }}</x-table.column>
+                    <x-table.column class="hidden lg:table-cell">{{ $order->items()->sum('quantity') }}</x-table.column>
 
                     <x-table.column class="hidden lg:table-cell">₱{{ number_format($order->total, 2) }}</x-table.column>
 
