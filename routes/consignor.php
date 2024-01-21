@@ -6,6 +6,7 @@ use App\Http\Controllers\Consignor\OrderController;
 use App\Http\Controllers\Consignor\ProductController;
 use App\Http\Controllers\Consignor\ReportController;
 use App\Http\Controllers\Consignor\TransactionController;
+use App\Livewire\Consignor\Inbox;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', DashboardController::class)->name('dashboard');
@@ -27,3 +28,5 @@ Route::prefix('reports')->group(function () {
 Route::prefix('contracts')->group(function () {
     Route::get('/', [ContractController::class, 'index'])->name('contracts');
 });
+
+Route::get('/inbox', Inbox::class)->name('inbox');

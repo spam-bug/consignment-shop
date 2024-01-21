@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Consignee extends Model
@@ -56,5 +57,15 @@ class Consignee extends Model
     public function products(): HasMany
     {
         return $this->hasMany(ConsigneeProduct::class);
+    }
+
+    public function conversations(): HasMany
+    {
+        return $this->hasMany(Conversation::class);
+    }
+
+    public function messages(): MorphMany
+    {
+        return $this->morphMany(Message::class, 'messageable');
     }
 }

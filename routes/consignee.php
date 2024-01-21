@@ -5,6 +5,7 @@ use App\Http\Controllers\Consignee\DashboardController;
 use App\Http\Controllers\Consignee\OrderController;
 use App\Http\Controllers\Consignee\ReportController;
 use App\Livewire\Consignee\Checkout;
+use App\Livewire\Consignee\Inbox;
 use App\Livewire\Consignee\MyProduct;
 use App\Livewire\Consignee\Products\LookUp;
 use App\Livewire\Consignee\Products\LookUpPreview;
@@ -47,3 +48,5 @@ Route::get('/checkout', Checkout::class)->name('checkout');
 Route::prefix('contracts')->group(function () {
     Route::get('/', [ContractController::class, 'index'])->name('contracts');
 });
+
+Route::get('/inbox', Inbox::class)->name('inbox');
