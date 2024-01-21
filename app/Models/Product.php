@@ -53,6 +53,11 @@ class Product extends Model
         return $this->belongsToMany(Contract::class, 'contract_has_products');
     }
 
+    public function orders(): HasMany
+    {
+        return $this->hasMany(OrderItem::class, 'product_id');
+    }
+
     public function stockRecords(): HasMany
     {
         return $this->hasMany(ProductStockRecord::class);
