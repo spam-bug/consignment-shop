@@ -3,7 +3,9 @@
 use App\Http\Controllers\Consignee\ContractController;
 use App\Http\Controllers\Consignee\DashboardController;
 use App\Http\Controllers\Consignee\OrderController;
+use App\Http\Controllers\Consignee\ReportController;
 use App\Livewire\Consignee\Checkout;
+use App\Livewire\Consignee\MyProduct;
 use App\Livewire\Consignee\Products\LookUp;
 use App\Livewire\Consignee\Products\LookUpPreview;
 use App\Livewire\Consignee\Products\OrderableProductPreview;
@@ -22,11 +24,17 @@ Route::prefix('products')->group(function () {
         Route::get('/{product:slug}', LookUpPreview::class)->name('products.look.preview');
     });
 
+    Route::get('/my-product', MyProduct::class)->name('products.my-product');
+
     Route::get('shortlist', Shortlists::class)->name('products.shortlists');
     Route::prefix('orderable')->group(function () {
         Route::get('/', OrderableProducts::class)->name('products.orderable');
         Route::get('/{product:slug}', OrderableProductPreview::class)->name('products.orderable.preview');
     });
+});
+
+Route::prefix('reports')->group(function () {
+    Route::post('products', [ReportController::class, 'products'])->name('reports.product');
 });
 
 Route::prefix('orders')->group(function () {

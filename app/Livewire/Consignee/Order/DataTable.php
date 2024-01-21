@@ -3,6 +3,7 @@
 namespace App\Livewire\Consignee\Order;
 
 use App\Enums\OrderStatus;
+use App\Enums\ProductStatus;
 use App\Enums\TransactionStatus;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,15 @@ class DataTable extends Component
         ]);
 
         $order->update(['status' => OrderStatus::Received]);
+
+        foreach ($order->items as $item) {
+            Auth::user()->consignee->products()->create([
+                'product_id' => $item->product->id,
+                'stock' => $item->quantity,
+                'stock_threshold' => 5,
+                'total' => $item->total,
+            ]);
+        }
 
         $this->dispatch('refresh');
     }
