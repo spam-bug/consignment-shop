@@ -52,6 +52,14 @@ return [
             'throw' => false,
         ],
 
+        'proof' => [
+            'driver' => 'local',
+            'root' => storage_path('app/proof'),
+            'url' => env('APP_URL').'/proof',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         'contracts' => [
             'driver' => 'local',
             'root' => storage_path('app/contracts'),
@@ -88,6 +96,7 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
         public_path('photos') => storage_path('app/photos'),
+        public_path('proof') => storage_path('app/proof'),
         public_path('contracts') => storage_path('app/contracts'),
     ],
 

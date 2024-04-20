@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\UserStatus;
-use App\Events\DeviceVerification;
 use App\Events\TwoFactorAuthentication;
 use App\Models\Concerns\HasRole;
 use App\Notifications\VerifyEmail;

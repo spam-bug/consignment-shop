@@ -3,6 +3,7 @@
         <x-slot:header>
             <x-table.heading>Reference Number</x-table.heading>
             <x-table.heading class="hidden lg:table-cell">Items Count</x-table.heading>
+            <x-table.heading class="hidden lg:table-cell">Damage Items</x-table.heading>
             <x-table.heading class="hidden lg:table-cell">Total</x-table.heading>
             <x-table.heading>Status</x-table.heading>
             <x-table.heading class="hidden lg:table-cell">Created On</x-table.heading>
@@ -15,6 +16,7 @@
                     <x-table.column class="font-medium">{{ strtoupper($order->reference_number) }}</x-table.column>
 
                     <x-table.column class="hidden lg:table-cell">{{ $order->items()->sum('quantity') }}</x-table.column>
+                    <x-table.column class="hidden lg:table-cell">{{ $order->items()->sum('damage_quantity') }}</x-table.column>
 
                     <x-table.column class="hidden lg:table-cell">₱{{ number_format($order->total, 2) }}</x-table.column>
 
@@ -33,6 +35,14 @@
                             <x-slot:menu>
                                 <x-dropdown.button
                                     x-on:click="$dispatch('open-modal', { identifier: 'view-order', 'order': {{ $order }} })">View</x-dropdown.button>
+                                    
+                                @if ($order->status === \App\Enums\OrderStatus::Received && \Carbon\Carbon::parse($order->created_at)->lessThanOrEqualTo(now()))
+                                    <x-dropdown.button
+                                        x-on:click="$dispatch('open-modal', { identifier: 'report-damage', 'order': {{ $order }} })"
+                                    >
+                                        Report Damage
+                                    </x-dropdown.button>
+                                @endif
 
                                 @if ($order->status === \App\Enums\OrderStatus::Shipped)
                                     <x-dropdown.button wire:click="received({{ $order }})">

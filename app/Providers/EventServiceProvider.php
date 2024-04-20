@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\DamagedProductReportDurationReminder;
 use App\Events\TwoFactorAuthentication;
+use App\Listeners\SendDamagedProductReportDurationReminder;
 use App\Listeners\SendTwoFactorVerificationCodeNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         TwoFactorAuthentication::class => [
             SendTwoFactorVerificationCodeNotification::class,
+        ],
+        DamagedProductReportDurationReminder::class => [
+            SendDamagedProductReportDurationReminder::class,
         ]
     ];
 

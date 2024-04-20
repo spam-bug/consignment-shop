@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\OrderStatus;
+use App\Events\DamagedProductReportDurationReminder;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -19,10 +20,13 @@ class Order extends Model
         'consignor_id',
         'total',
         'status',
+        'is_damage_reported',
+        'add_proof_of_damage',
     ];
 
     protected $casts = [
         'status' => OrderStatus::class,
+        'add_proof_of_damage' => 'array',
     ];
 
     public static function boot()
@@ -70,5 +74,10 @@ class Order extends Model
         }
 
         return $referenceNumber;
+    }
+
+    public function sendDamagedProductReportDurationReminder()
+    {
+        event(new DamagedProductReportDurationReminder($this));
     }
 }

@@ -73,13 +73,13 @@ class Product extends Model
         return $this->hasMany(Shortlist::class);
     }
 
-    protected function price(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => number_format($value, 2),
-            set: fn ($value) => str_replace(",", "", $value)
-        );
-    }
+    // protected function price(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn ($value) => number_format($value, 2),
+    //         set: fn ($value) => str_replace(",", "", $value)
+    //     );
+    // }
 
     protected function unitPrice(): Attribute
     {

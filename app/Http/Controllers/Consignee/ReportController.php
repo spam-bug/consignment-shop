@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
+    public function index()
+    {
+        return view('consignee.reports.index');
+    }
+
     public function products()
     {
         $products = Auth::user()->consignee->products;

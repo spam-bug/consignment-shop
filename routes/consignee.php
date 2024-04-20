@@ -35,6 +35,7 @@ Route::prefix('products')->group(function () {
 });
 
 Route::prefix('reports')->group(function () {
+    Route::get('/', [ReportController::class, 'index'])->name('reports');
     Route::post('products', [ReportController::class, 'products'])->name('reports.product');
 });
 
