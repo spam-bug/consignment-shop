@@ -21,6 +21,7 @@ Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions');
 
 Route::prefix('reports')->group(function () {
+    Route::get('/', [ReportController::class, 'index'])->name('reports');
     Route::post('/transactions', [ReportController::class, 'transactions'])->name('reports.transactions');
     Route::post('/products', [ReportController::class, 'products'])->name('reports.products');
 });

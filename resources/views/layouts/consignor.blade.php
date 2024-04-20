@@ -104,6 +104,17 @@
                         <p>Inbox</p>
                     </a>
                 </li>
+
+                <li>
+                    <a
+                        href="{{ route('consignor.reports') }}"
+                        wire:navigate
+                        class="flex items-center gap-2 rounded px-4 py-2 hover:bg-gray-100"
+                    >
+                        <i class="fa-solid fa-bullhorn"></i>
+                        <p>Reports</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
