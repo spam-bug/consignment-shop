@@ -173,14 +173,18 @@
         <header class="sticky inset-0 z-40 flex h-[65px] items-center justify-between border-b border-gray-200 bg-white p-4">
             <h1 class="text-2xl font-medium">{{ is_callable($title) ? $title() : $title }}</h1>
 
-            <x-button
-                variety="secondary"
-                outline
-                x-on:click="shown = !shown"
-                class="lg:hidden"
-            >
-                <i class="fa-solid fa-bars"></i>
-            </x-button>
+            <div class="flex gap-2">
+                <livewire:consignee.notifications />
+
+                <x-button
+                    variety="secondary"
+                    outline
+                    x-on:click="shown = !shown"
+                    class="lg:hidden"
+                >
+                    <i class="fa-solid fa-bars"></i>
+                </x-button>
+            </div>
         </header>
 
         <main>
