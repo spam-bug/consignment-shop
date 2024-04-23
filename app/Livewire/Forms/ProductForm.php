@@ -27,12 +27,14 @@ class ProductForm extends Form
 
     public function createProduct(): Product
     {
+        
         $this->validate();
 
         $category = Category::findBySlug($this->category);
 
         $product = Auth::user()->consignor->products()->create([
             ...$this->except('photos'),
+            'price' => str_replace(",", "", $this->price),
             'category_id' => $category->id,
             'status' => ProductStatus::Listed,
             'photos' => $this->storePhotos($this->photos),
@@ -54,6 +56,7 @@ class ProductForm extends Form
 
         $this->product->update([
             ...$this->except('photos'),
+            'price' => str_replace(",", "", $this->price),
             'category_id' => $category->id,
             'photos' => $this->storePhotos($this->photos),
         ]);
