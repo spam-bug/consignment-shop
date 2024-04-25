@@ -16,7 +16,13 @@
                 <p class="border-r border-gray-200 pr-4">{{ $product->category->name }}</p>
                 <p>1.1k sold</p>
             </div>
-            <p class="mt-4 text-2xl font-medium text-rose-600">{{ $product->unit_price }}</p>
+            <p class="mt-4 text-2xl font-medium text-rose-600">
+                @if($product->selling_price)
+                    ₱{{ number_format($product->selling_price, 2) }}
+                @else
+                    not set
+                @endif
+            </p>
 
             @if ($product->stock)
                 <div class="mt-8 flex items-center gap-2">

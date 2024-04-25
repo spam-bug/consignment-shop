@@ -72,7 +72,7 @@ class ReportController extends Controller
 
         $pdf = Pdf::loadView('consignor.report.transactions', $data)->setPaper('legal', 'landscape');
 
-        return $pdf->download();
+        return $pdf->stream();
     }
 
     public function products(Request $request)

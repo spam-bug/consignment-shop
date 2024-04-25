@@ -27,7 +27,13 @@
                             <div>
                                 <p class="font-medium">{{ $item->product->name }}</p>
                                 <div>
-                                    <p class="text-sm text-gray-500">Total: <span class="text-rose-600">{{ $item->product->unit_price }}</span></p>
+                                    <p class="text-sm text-gray-500">Total: <span class="text-rose-600">
+                                        @if($item->product->selling_price)
+                                            ₱{{ number_format($item->product->selling_price, 2) }}
+                                        @else
+                                            not set
+                                        @endif
+                                    </span></p>
                                     <p class="text-sm text-gray-500">Quantity: {{ $item->quantity }}</p>
                                 </div>
                             </div>

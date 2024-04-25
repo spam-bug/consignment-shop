@@ -33,6 +33,11 @@ class ShoppingCart extends Component
         $this->redirect(route('consignee.checkout'), true);
     }
 
+    public function delete(Cart $item)
+    {
+        $item->delete();
+    }
+
     public function render()
     {
         $consignee = Auth::user()->consignee;

@@ -43,7 +43,13 @@
                     <h6 class="line-clamp-2 font-medium">{{ $product->name }}</h6>
 
                     <div class="flex w-full items-end justify-between">
-                        <p class="font-medium text-rose-600">{{ $product->unit_price }}</p>
+                        <p class="font-medium text-rose-600">
+                            @if($product->selling_price)
+                                ₱{{ number_format($product->selling_price, 2) }}
+                            @else
+                                not set
+                            @endif
+                        </p>
                         <p class="text-sm text-gray-500">1.1k sold</p>
                     </div>
                 </div>

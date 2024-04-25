@@ -29,7 +29,12 @@ class OrderableProductPreview extends Component
         );
         
         $cartItem->quantity += $this->quantity;
-        $cartItem->total = (float) str_replace(',', '', $this->product->price) * $cartItem->quantity;
+        if ($this->product->selling_price) {
+            $cartItem->total = (float) str_replace(',', '', $this->product->selling_price) * $cartItem->quantity;
+        } else {
+            $cartItem->total = 0.00;
+        }
+        
         $cartItem->save();
 
         $this->dispatch('alert', type: AlertType::Success, message: "Item has been added to cart.");

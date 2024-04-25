@@ -27,7 +27,13 @@
 
                             <div>
                                 <p class="font-medium">{{ $shortlist->product->name }}</p>
-                                <p class="text-rose-600">{{ $shortlist->product->unit_price }}</p>
+                                <p class="text-rose-600">
+                                    @if($shortlist->product->selling_price)
+                                        ₱{{ number_format($shortlist->product->selling_price, 2) }}
+                                    @else
+                                        not set
+                                    @endif
+                                </p>
                             </div>
                         </div>
 
