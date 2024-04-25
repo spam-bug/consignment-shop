@@ -23,6 +23,7 @@ class ProductForm extends Form
     public $stock = '';
     public $stock_threshold = '';
     public $price = '';
+    public $selling_price = '';
     public $photos = [];
 
     public function createProduct(): Product
@@ -35,6 +36,7 @@ class ProductForm extends Form
         $product = Auth::user()->consignor->products()->create([
             ...$this->except('photos'),
             'price' => str_replace(",", "", $this->price),
+            'selling_price' => str_replace(",", "", $this->selling_price),
             'category_id' => $category->id,
             'status' => ProductStatus::Listed,
             'photos' => $this->storePhotos($this->photos),
@@ -57,6 +59,7 @@ class ProductForm extends Form
         $this->product->update([
             ...$this->except('photos'),
             'price' => str_replace(",", "", $this->price),
+            'selling_price' => str_replace(",", "", $this->selling_price),
             'category_id' => $category->id,
             'photos' => $this->storePhotos($this->photos),
         ]);
@@ -82,6 +85,7 @@ class ProductForm extends Form
             'stock' => ['required', 'integer'],
             'stock_threshold' => ['required', 'integer'],
             'price' => ['required', 'currency'],
+            'selling_price' => ['required', 'currency'],
             'photos' => ['required', 'min:1'],
         ];
 

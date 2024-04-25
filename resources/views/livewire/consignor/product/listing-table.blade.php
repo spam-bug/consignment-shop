@@ -4,8 +4,8 @@
             <x-table.heading>Name</x-table.heading>
             <x-table.heading class="hidden lg:table-cell">SKU</x-table.heading>
             <x-table.heading class="hidden lg:table-cell">Category</x-table.heading>
-            <x-table.heading class="hidden lg:table-cell">Unit Price</x-table.heading>
-            <x-table.heading class="hidden lg:table-cell">Total Price</x-table.heading>
+            <x-table.heading class="hidden lg:table-cell">Original Price</x-table.heading>
+            <x-table.heading class="hidden lg:table-cell">Selling Price</x-table.heading>
             <x-table.heading class="hidden lg:table-cell">Stock</x-table.heading>
             <x-table.heading>Status</x-table.heading>
             <x-table.heading class="hidden lg:table-cell">Created On</x-table.heading>
@@ -29,7 +29,13 @@
                     <x-table.column class="hidden lg:table-cell">{{ $product->sku }}</x-table.column>
                     <x-table.column class="hidden lg:table-cell">{{ $product->category_name }}</x-table.column>
                     <x-table.column class="hidden lg:table-cell">{{ $product->unit_price }}</x-table.column>
-                    <x-table.column class="hidden lg:table-cell">{{ $product->total_price }}</x-table.column>
+                    <x-table.column class="hidden lg:table-cell">
+                        @if($product->selling_price)
+                            ₱{{ number_format($product->selling_price, 2) }}
+                        @else
+                            not set
+                        @endif
+                    </x-table.column>
                     <x-table.column class="hidden lg:table-cell">{{ $product->stock }}</x-table.column>
                     <x-table.column>
                         <x-status :variety="$product->status->variety()">{{ $product->status->value }}</x-status>

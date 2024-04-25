@@ -33,6 +33,13 @@ class EditForm extends Component
         }
     }
 
+    public function updatedFormSellingPrice($value)
+    {
+        if (preg_match('/^-?\d+(\.\d+)?$/', $value)) {
+            $this->form->selling_price = number_format($value, 2);
+        }
+    }
+
     public function save()
     {
         $product = $this->form->updateProduct();

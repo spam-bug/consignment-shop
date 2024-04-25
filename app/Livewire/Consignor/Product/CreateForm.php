@@ -36,6 +36,13 @@ class CreateForm extends Component
             $this->form->price = number_format($value, 2);
         }
     }
+    
+    public function updatedFormSellingPrice($value)
+    {
+        if (preg_match('/^-?\d+(\.\d+)?$/', $value)) {
+            $this->form->selling_price = number_format($value, 2);
+        }
+    }
 
     public function removePhoto($index)
     {

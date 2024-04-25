@@ -141,7 +141,7 @@
             </div>
 
             <div class="mt-4">
-                <x-form.label for="price">Price</x-form.label>
+                <x-form.label for="price">Original Price</x-form.label>
                 <div class="relative">
                     <x-form.input
                         id="price"
@@ -152,6 +152,20 @@
                     <p class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">₱</p>
                 </div>
                 <x-form.error for="form.price" />
+            </div>
+
+            <div class="mt-4">
+                <x-form.label for="selling_price">Selling Price</x-form.label>
+                <div class="relative">
+                    <x-form.input
+                        id="selling_price"
+                        type="text"
+                        wire:model.blur="form.selling_price"
+                        class="pl-10"
+                    />
+                    <p class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">₱</p>
+                </div>
+                <x-form.error for="form.selling_price" />
             </div>
 
             <div class="mt-4">

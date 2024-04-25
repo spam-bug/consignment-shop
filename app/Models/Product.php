@@ -27,6 +27,7 @@ class Product extends Model
         'name',
         'description',
         'price',
+        'selling_price',
         'stock',
         'stock_threshold',
         'photos',
