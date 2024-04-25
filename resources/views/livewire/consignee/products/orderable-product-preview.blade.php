@@ -1,13 +1,7 @@
 <div>
     <div class="grid gap-4 p-4 sm:gap-6 sm:p-6 lg:grid-cols-3 lg:gap-8 lg:p-8">
         <div class="aspect-square w-full">
-            @if (file_exists(asset($product->photos[0])))
-                <img src="{{ asset($product->photos[0]) }}" alt="">
-            @else
-                <div class="flex h-full w-full items-center justify-center bg-gray-100">
-                    <i class="fa-regular fa-image text-4xl text-gray-300"></i>
-                </div>
-            @endif
+            <img src="{{ asset($product->photos[0]) }}" alt="">
         </div>
 
         <div class="lg:col-span-2">

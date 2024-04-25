@@ -36,13 +36,7 @@
                 class="inline-block overflow-hidden rounded border border-gray-200 p-4 hover:shadow"
             >
                 <div class="aspect-square">
-                    @if (file_exists(asset($product->photos[0])))
-                        <img src="{{ asset($product->photos[0]) }}" alt="">
-                    @else
-                        <div class="flex h-full w-full items-center justify-center bg-gray-100">
-                            <i class="fa-regular fa-image text-4xl text-gray-300"></i>
-                        </div>
-                    @endif
+                    <img src="{{ asset($product->photos[0]) }}" alt="">
                 </div>
 
                 <div class="mt-4 grid h-[96px] grid-rows-2">

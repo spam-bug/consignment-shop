@@ -16,13 +16,7 @@
                     <div class="flex items-center justify-between border-b border-gray-200 p-4">
                         <div class="flex gap-2">
                             <div class="h-12 w-12 overflow-hidden">
-                                @if (file_exists(asset($shortlist->product->photos[0])))
-                                    <img src="{{ asset($shortlist->product->photos[0]) }}" alt="">
-                                @else
-                                    <div class="flex h-full w-full items-center justify-center bg-gray-100">
-                                        <i class="fa-regular fa-image text-xl text-gray-300"></i>
-                                    </div>
-                                @endif
+                                <img src="{{ asset($shortlist->product->photos[0]) }}" alt="">
                             </div>
 
                             <div>
